@@ -1,20 +1,25 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import { useTheme } from '../contexts/ThemeContext';
 
 export function UseContextComponent() {
-  const [ inputValue, setInputValue ] = useState<string>('Modify me !');
+  const themeContext = useTheme();
 
-  const onInputChange = (event: FormEvent<HTMLInputElement>) => {
-    setInputValue(event.currentTarget.value);
+  const onClick = () => {
+    if (themeContext) {
+      themeContext.toggleDarkMode();
+    }
   };
-
-  // Side effect happens only when inputValue changes
-  useEffect(() => {
-    console.log(`inputValue changed to ${inputValue}`);
-  }, [inputValue]);
-  
 
   return (<>
     <h2>useContext</h2>
-    <input type="text" onChange={onInputChange} defaultValue={inputValue} />
+    <button
+      type="button"
+      onClick={onClick}
+      style={{
+        color: themeContext?.settings.darkMode ? 'white' : 'black',
+        backgroundColor: themeContext?.settings.darkMode ? 'black' : 'white',
+      }}
+    >
+      {`Toggle to ${themeContext?.settings.darkMode ? 'light' : 'dark'} mode`}
+    </button>
   </>);
 }
