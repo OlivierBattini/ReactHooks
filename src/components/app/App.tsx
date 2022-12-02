@@ -1,3 +1,5 @@
+import { ThemeProvider } from '../contexts/ThemeContext';
+import { UseContextComponent } from '../hooks/UseContextComponent';
 import { UseMemoComponent } from '../hooks/UseMemoComponent';
 import { UseRefComponent } from '../hooks/UseRefComponent';
 import { UseStateComponent } from '../hooks/UseStateComponent';
@@ -15,6 +17,9 @@ function App() {
         <UseRefComponent />
         <UseStateComponent />
         <UseMemoComponent />
+        <ThemeProvider>
+          <UseContextComponent />
+        </ThemeProvider>
       </main>
     </div>
   );
